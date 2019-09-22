@@ -1,0 +1,22 @@
+{
+    "extends": "standard",
+    "globals": {
+      "expect": true,
+      "describe": true,
+      "it": true
+    },
+    "rules": {
+        "no-unused-vars": [
+          "error",
+          {
+            "vars": "all",
+            "args": "after-used",
+            "ignoreRestSiblings": false ,
+            "varsIgnorePattern": "[iI]gnored"
+          }
+        ],
+        "no-console": [
+          "error", { "allow": ["warn", "error"] }
+        ]
+    }
+}

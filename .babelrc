@@ -1,0 +1,28 @@
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "node": "current"
+      }
+    }],
+    ["@babel/preset-typescript",
+      { 
+        "isTSX": true ,
+        "jsxPragma": "App.createUtahObject",
+        "allExtensions": true
+      }
+    ],
+    ["@babel/preset-react",
+    {
+      "pragma": "App.createUtahObject", // default pragma is React.createElement
+      "pragmaFrag": "AppFrag", // default is React.Fragment
+      "throwIfNamespace": false // defaults to true
+    }
+  
+  ]
+  ],
+  "plugins": [
+    "@babel/proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
+  ]
+}

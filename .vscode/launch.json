@@ -1,0 +1,51 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/dist/debugstart.js",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": null,
+            "runtimeVersion": "11.4.0",
+            "runtimeArgs": [ "--nolazy" ],
+            "preLaunchTask": "npm: build",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "externalConsole": false,
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/dist"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Jest: Run all",
+            "program": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": [],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true
+          },
+          {
+            "type": "node",
+            "request": "launch",
+            "name": "Jest: Run current File",
+            "program": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": [
+              "${relativeFile}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true
+          }
+      }
+    ]
+  }
+
+
+
+  
