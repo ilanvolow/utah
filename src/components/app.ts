@@ -13,10 +13,9 @@ import React from 'react';
 const debug = debugLib('your-project-name:server');
 
 class App {
-
     public readonly app: express.Application
+    public readonly server: http.Server
     private port: string
-    private server: http.Server
 
     static jsxFactory(args: any, children: any[]) {
       const newApp: App = new App();
@@ -29,6 +28,7 @@ class App {
           newApp.addDataEntityRoutes(currData);
         }
       }
+
       return newApp;
     }
 
