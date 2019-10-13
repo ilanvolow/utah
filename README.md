@@ -2,6 +2,7 @@
 
 Utah.ts is backend prototyping system based on Express.js that's designed help you quickly creating a backend system for protyping new applcations/microservices, mainly those targeting native mobile applications.
 
+
 ### Getting Started:
 
 Prerequisites:
@@ -24,7 +25,8 @@ Install the VSCode extension to get command autocompletion.
 
 ### Philosophy: ###
 
-Utah is designed to come back a number of shortcomings I've found with existing systems:
+
+Utah is also designed to come back a number of shortcomings I've found with existing systems:
 
 
 1. It's really a pain in the butt to set up Express for a 5 minute project.
@@ -42,4 +44,10 @@ Approach:
 5. Get the user using your stuff right away.
 6. Write lots of documentation. Documentation is what makes or breaks a programming technology. One line of documentation is worth 10 lines of code.
 
-Utah.ts is designed to get the MVP backend prototype up and running in five minutes. It won't even run a FAANG company--and that's okay. 
+Utah.ts is designed to get the MVP backend prototype up and running in five minutes. It won't ever run a FAANG company--and that's okay. 
+
+Utah.ts my first experiment in the subject of Beachstorming.
+
+### Beachstorming: ###
+*Beachstorming -- The strategy of hitting the ground running with as much architecture, stack, and functionality as you can at the start of a new project to avoid those things being eternally latered by management. Because later never comes. Beachstorming is counter to agile philosophies of "build the stack as we go"; instead advocating "have the stack at the get go".*
+
