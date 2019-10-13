@@ -1,6 +1,6 @@
 import request from 'supertest';
 import express from 'express';
-import { App, Route, Response, ResponseHandler, Param } from '../utah'
+import { App, Route, Response, ResponseHandler, Param, HTTPRequest, HTTPResponse } from '../utah'
 import app from 'express/lib/application';
 
 describe('Query parameters', () => {
@@ -11,7 +11,7 @@ describe('Query parameters', () => {
 
       }
 
-      public handle(request: express.Request, response: express.Response) {
+      public handle(request: HTTPRequest, response: HTTPResponse) {
         response.reply('unsucessfulResponse', undefined);
       }
     }
@@ -63,7 +63,7 @@ describe('Query parameters', () => {
 
       }
 
-      public handle(request: express.Request, response: express.Response) {
+      public handle(request: utah, response: express.Response) {
         if (request.query.bunny_name === 'foofoo') {
           response.reply('successfulResponse', {'testOne': 'r'})
         } else {

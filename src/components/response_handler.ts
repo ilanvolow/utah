@@ -1,8 +1,15 @@
-import * as express from 'express';
+import { Request, Response } from 'express';
 
-interface ResponseHandler {
+interface HTTPRequest extends Request {
 
-    handle(request: express.Request, response: express.Response): void;
 }
 
-export default ResponseHandler
+interface HTTPResponse extends Response {
+    reply(responseName: string, content: any): void;
+}
+
+interface ResponseHandler {
+    handle(request: HTTPRequest, response: HTTPResponse): void;
+}
+
+export { ResponseHandler, HTTPRequest, HTTPResponse };

@@ -1,7 +1,7 @@
 import request from 'supertest';
 import express from 'express';
 
-import { App, Route, Response, ResponseHandler } from '../utah'
+import { App, Route, Response, ResponseHandler, HTTPRequest, HTTPResponse } from '../utah'
 
 describe('Routing', () => {
 
@@ -10,7 +10,7 @@ describe('Routing', () => {
           constructor() {
 
           }
-          public handle(request: express.Request, response: express.Response) {
+          public handle(request: HTTPRequest, response: HTTPResponse) {
             if (request.query.testSuccess) {
               response.reply('successfulResponse', {'testOne': 'r'})
             } else if (request.query.testFailure) {

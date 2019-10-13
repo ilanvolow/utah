@@ -1,9 +1,11 @@
 import express, { Express } from 'express';
 import Response from './response';
-import ResponseHandler from './response_handler';
+import { ResponseHandler } from './response_handler';
 import RouteDelegate from './route_delegate';
 import Param from './param';
 import { bindExpression } from '@babel/types';
+import * as utah from '../utah';
+import { UtahDataAdapter } from './entity/data';
 
 class Route {
 
@@ -96,7 +98,7 @@ class Route {
         const queryParams = this.queryParams;
         const pathParams = this.pathParams;
 
-        function validateParams(req: express.Request, res: express.Response, next) {
+        function validateParams(req: utah.HTTPRequest, res: utah.HTTPResponse, next: express.NextFunction) {
             // Go through each non-optional query parameter and make sure it's represented
             // in the request. If not, send back an error.
             for (let queryParamKey in queryParams) {
@@ -123,7 +125,7 @@ class Route {
          * 
          * Adds reply() method and responses properties to express
          */
-        function addResponses(req, res, next) {
+        function addResponses(req: utah.HTTPRequest, res: utah.HTTPResponse, next: express.NextFunction) {
 
             function reply(responseName: string, content: any) {
                 const responseToUse = this.responses[responseName];
