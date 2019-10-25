@@ -1,23 +1,28 @@
 import request from 'supertest';
 import express from 'express';
 import { App, Route, Response, ResponseHandler, JSON, HTTPRequest, HTTPResponse } from '../../utah'
-import { Data, Entity } from '../../components/entity/data';
+import { Data, Entity, Property } from '../../components/entity/data';
+import { TingoAdapter, TingoDataAdapter } from '../../components/entity/tingo';
+import { file, FileResult } from 'tmp-promise'
+// import { FileResult } from 'tmp'
 
 describe('Entity Data Tests', () => {
     describe('Entity setup', () => {
-        const appObject: App =
-        <App>
-            <Data>
-                <Entity>
-                    <Property name="name" type="string"/>
-                    <Property name="race" type="string"/>
-                    <Property name="introduced_season" type="number"/>
-                </Entity>
-            </Data>
-        </App>
 
-        it('Should use TingoDB by default', () => {
 
+        it('Should use TingoDB by default', async () => {
+
+            const result: FileResult = await file();
+            const appObject: App =
+            <App>
+                <Data class={TingoDataAdapter} config={{ 'storepath': result.path }}>
+                    <Entity name="Character">
+                        <Property name='name' type='string'/>
+                        <Property name='race' type='string'/>
+                        <Property name='introduced_season' type='number'/>
+                    </Entity>
+                </Data>
+            </App>
         });
     });
 

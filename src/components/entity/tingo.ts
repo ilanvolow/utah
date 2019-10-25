@@ -39,9 +39,9 @@ class TingoDataAdapter implements UtahDataAdapter {
     private storepath: string;
     private db: any;
 
-    constructor(name: string, children: any, storepath: string) {
-       this.db = new Engine.Db(storepath, {});
-       this.storepath = storepath;
+    constructor(name: string, config: {}, children: []) {
+       this.db = new Engine.Db(config.storepath, {});
+       this.storepath = config.storepath;
     }
 
     setupSchema(children: Property[]): Schema {
@@ -55,6 +55,8 @@ class TingoDataAdapter implements UtahDataAdapter {
         this.model = model(this.name, this.schema);
         return this.schema;
     }
+
+    // Be
 
     createNewItem(request: express.Request, response: express.Response) {
         // mongoose.connect(this.conn_string);
