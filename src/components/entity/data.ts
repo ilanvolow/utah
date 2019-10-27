@@ -38,7 +38,7 @@ class Data {
         // Becasue the Entity objects are technically created before the Data object (how JSX works)
         // we have to go back and their those entity objects' data adapters
         entities.map(currEntity => {
-            currEntity.setDataAdapterClass(this.adapterClass);
+            currEntity.setDataAdapterClass(this.adapterClass, this.adapterConfig);
         });
     }
 

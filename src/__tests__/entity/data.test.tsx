@@ -22,7 +22,26 @@ describe('Entity Data Tests', () => {
                         <Property name='introduced_season' type='number'/>
                     </Entity>
                 </Data>
-            </App>
+            </App>        
+            
+            const response = await request(appObject.app)
+                .post('/character')
+                .send({
+                        name: 'Lucifer',
+                        race: 'Devil',
+                        introduced_season: 1
+                });
+
+                expect(response.statusCode).toBe(200);
+                // expect(response.body).toEqual({
+                //     'bed' : 'cama',
+                //     'butterfly' : 'mariposa',
+                //     'cow' : 'vaca'
+                // });
+            appObject.server.close();
+
+
+
         });
     });
 

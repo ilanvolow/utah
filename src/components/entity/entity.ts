@@ -21,10 +21,10 @@ class Entity {
         return entity;
     }
 
-    setDataAdapterClass(adapterClass: typeof UtahDataAdapter) {
+    setDataAdapterClass(adapterClass: typeof UtahDataAdapter, config: any) {
 
         // Here's where we actually create the instance of the adapter
-        this.dataAdapter =  new adapterClass(this.name, this.properties);
+        this.dataAdapter =  new adapterClass(this.name, config, this.properties);
         this.setupRouting();
     }
 

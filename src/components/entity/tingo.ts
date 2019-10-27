@@ -24,39 +24,15 @@ function convertToNodeType(typeName: string) {
 
 class TingoDataAdapter implements UtahDataAdapter {
 
-    //public name: string;
-    //  public conn_string: string;
-    //public schema: Schema;
-    protected model: any;
-
-    // constructor(name: string, children: any, conn_string = MONGODB_DEFAULT_CONNECTION) {
-    //     this.name = name;
-    //     this.model = undefined;
-    //     this.schema = this.setupSchema(children);
-    //     this.conn_string = conn_string;
-    // }
-
+    public name: string;
     private storepath: string;
     private db: any;
 
-    constructor(name: string, config: {}, children: []) {
-       this.db = new Engine.Db(config.storepath, {});
-       this.storepath = config.storepath;
+    constructor(name: string, config: any, children: []) {
+        this.name = name;
+        this.db = new Engine.Db(config.storepath, {});
+        this.storepath = config.storepath;
     }
-
-    setupSchema(children: Property[]): Schema {
-        const schemaProps: {[index: string]: any} = {};
-
-        for (const item of children) {
-            schemaProps[item.name] = convertToNodeType(item.propertyType);
-        }
-
-        this.schema = new Schema(schemaProps, {timestamps: true});
-        this.model = model(this.name, this.schema);
-        return this.schema;
-    }
-
-    // Be
 
     createNewItem(request: express.Request, response: express.Response) {
         // mongoose.connect(this.conn_string);
@@ -65,6 +41,16 @@ class TingoDataAdapter implements UtahDataAdapter {
         //     console.log(doc);
         //     response.json({ title: 'MongoBongo -- Create!'});
         // });
+
+        // TODO: Put in promise here
+        let collection = this.db.collection(this.name);
+        collection.insert(request.body, function(err: any, item: any) {
+            if (err) {
+                response.status(500).send(err);
+            } else {
+                response.json({ title: 'TingoBingo -- Create!'});
+            }
+        });
     }
 
     retrieveItem(request: express.Request, response: express.Response) {
