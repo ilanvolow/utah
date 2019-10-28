@@ -4,6 +4,7 @@ import express, { Express } from 'express';
 import UtahDataAdapter from './entityix';
 import mongoose, { Document, Schema, Model, model } from 'mongoose';
 import { Entity, Property } from './entity';
+import * as uuid from 'uuid';
 const MONGODB_DEFAULT_CONNECTION: string = 'mongodb://localhost:27017/test';
 
 const Engine = require('tingodb')();
@@ -42,13 +43,20 @@ class TingoDataAdapter implements UtahDataAdapter {
         //     response.json({ title: 'MongoBongo -- Create!'});
         // });
 
+        // Add UUID and created/updated timestamps
+        const newUUID = uuid.v4();
+
+        let content = Object.assign(request.body);
+        content["uuid"] = newUUID;
+
+
         // TODO: Put in promise here
         let collection = this.db.collection(this.name);
-        collection.insert(request.body, function(err: any, item: any) {
+        collection.insert(content, function(err: any, item: any) {
             if (err) {
                 response.status(500).send(err);
             } else {
-                response.json({ title: 'TingoBingo -- Create!'});
+                response.json(item[0].toString());
             }
         });
     }

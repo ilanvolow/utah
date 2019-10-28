@@ -65,6 +65,7 @@
   },
   "dependencies": {
     "@types/mongoose": "^5.5.12",
+    "@types/uuid": "^3.4.5",
     "cookie-parser": "^1.4.4",
     "express": "^4.16.3",
     "mongodb": "^3.3.0",
@@ -74,6 +75,7 @@
     "tingodb": "^0.6.1",
     "tmp": "^0.1.0",
     "tmp-promise": "^2.0.2",
-    "tungus": "^0.0.5"
+    "tungus": "^0.0.5",
+    "uuid": "^3.3.3"
   }
 }
