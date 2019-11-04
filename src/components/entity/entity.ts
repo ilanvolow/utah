@@ -31,14 +31,15 @@ class Entity {
     setupRouting() {
         if (this.dataAdapter) {
             const basePath = '/' + this.name.toLowerCase();
+
             this.router.post(basePath, this.dataAdapter.createNewItem.bind(this.dataAdapter));
 
             // TODO: doing a more 'join' way of doing this
             const getRetrievePath = basePath + '/:id';
             this.router.get(getRetrievePath, this.dataAdapter.retrieveItem.bind(this.dataAdapter));
 
-            const putPath = basePath + '/:id';
-            this.router.put(putPath, this.dataAdapter.updateItem.bind(this.dataAdapter));
+            const putPath        = basePath + '/:id';
+            this.router.put(putPath,         this.dataAdapter.updateItem.bind(this.dataAdapter));
 
             const deletePath = basePath + '/:id';
             this.router.delete(deletePath, this.dataAdapter.deleteItem.bind(this.dataAdapter));

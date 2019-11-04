@@ -9,12 +9,17 @@ describe('Entity Data Tests', () => {
     describe('Entity setup', () => {
 
 
-        it('Should be able to store and retrieve', async () => {
+
+    });
+
+    describe('Entity storing', () => {
+
+        it('Should be able to store', async () => {
 
             const result: DirectoryResult = await dir();
             const appObject: App =
             <App>
-                <Data class={TingoDataAdapter} config={{ 'storepath': '/Users/ilanvolow/temp/tingo' }}>
+                <Data class={TingoDataAdapter} config={{ 'storepath': result.path }}>
                     <Entity name="Character">
                         <Property name='name' type='string'/>
                         <Property name='race' type='string'/>
@@ -40,22 +45,106 @@ describe('Entity Data Tests', () => {
         });
     });
 
-    describe('Entity storing', () => {
-
-    });
-
     describe('Entity retrieving', () => {
+        it('Should be able to retrieve', async () => {
+            const result: DirectoryResult = await dir();
+            const appObject: App =
+            <App>
+                <Data class={TingoDataAdapter} config={{ 'storepath': result.path }}>
+                    <Entity name="Character">
+                        <Property name='name' type='string'/>
+                        <Property name='race' type='string'/>
+                        <Property name='introduced_season' type='number'/>
+                    </Entity>
+                </Data>
+            </App>
 
+            const response = await request(appObject.app)
+                .post('/character')
+                .send({
+                        'name': 'Lucifer',
+                        'race': 'Devil',
+                        'introduced_season': 1
+                });
+
+            expect(response.statusCode).toBe(200);
+
+            const queryString = `/character/${response.body.uuid}`;
+            const retrieve = await request(appObject.app)
+                .get(queryString);
+
+            expect(retrieve.body.uuid).toEqual(response.body.uuid);
+
+            appObject.server.close();
+        });
     });
 
-    describe('Etntiy updating', () => {
+    describe('Entity updating', () => {
+        it('Should be able to retrieve', async () => {
+            const result: DirectoryResult = await dir();
+            const appObject: App =
+            <App>
+                <Data class={TingoDataAdapter} config={{ 'storepath': result.path }}>
+                    <Entity name="Character">
+                        <Property name='name' type='string'/>
+                        <Property name='race' type='string'/>
+                        <Property name='introduced_season' type='number'/>
+                    </Entity>
+                </Data>
+            </App>
 
+            const insertResponse = await request(appObject.app)
+                .post('/character')
+                .send({
+                        'name': 'Lucifer',
+                        'race': 'Devil',
+                        'introduced_season': 1
+                });
+
+            const bodyObject = Object.assign(insertResponse.body, { 'name': 'Mazikeen', 'race': 'demon'});
+
+            const putStatement = `/character/${insertResponse.body.uuid}`;
+
+            const updateResponse = await request(appObject.app)
+                .put(putStatement)
+                .send(bodyObject);
+
+            expect(updateResponse.body).toEqual(1);
+            appObject.server.close();
+        });
     });
 
     describe('Entity deleting', () => {
+        it('Should be able to retrieve', async () => {
+            const result: DirectoryResult = await dir();
+            const appObject: App =
+            <App>
+                <Data class={TingoDataAdapter} config={{ 'storepath': result.path }}>
+                    <Entity name="Character">
+                        <Property name='name' type='string'/>
+                        <Property name='race' type='string'/>
+                        <Property name='introduced_season' type='number'/>
+                    </Entity>
+                </Data>
+            </App>
 
+            const insertResponse = await request(appObject.app)
+                .post('/character')
+                .send({
+                        'name': 'Lucifer',
+                        'race': 'Devil',
+                        'introduced_season': 1
+                });
+
+            const queryString = `/character/${insertResponse.body.uuid}`;
+
+            const deleteResponse = await request(appObject.app)
+                .delete(queryString);
+
+            expect(deleteResponse.body).toEqual(1);
+            appObject.server.close();
+        });
     });
-
 });
 // describe('Query parameters', () => {
 

@@ -46,61 +46,68 @@ class TingoDataAdapter implements UtahDataAdapter {
         // Add UUID and created/updated timestamps
         const newUUID = uuid.v4();
 
-        let content = Object.assign(request.body);
-        content["uuid"] = newUUID;
+        const content = Object.assign(request.body);
+        content['uuid'] = newUUID;
 
 
         // TODO: Put in promise here
-        let collection = this.db.collection(this.name);
+        const collection = this.db.collection(this.name);
         collection.insert(content, function(err: any, item: any) {
             if (err) {
                 response.status(500).send(err);
             } else {
-                response.json(item[0].toString());
+                response.json(item[0]);
             }
         });
     }
 
     retrieveItem(request: express.Request, response: express.Response) {
-        // const idParam = request.params['id'];
-        // if (idParam) {
-        //     mongoose.connect(this.conn_string);
-        //     this.model.findById(idParam).then((doc: mongoose.Document) => {
-        //         const resultJSON = JSON.stringify(doc);
-        //         response.end(resultJSON);
-        //     });
-        // } else {
-        //     response.status(400).send('Incorrect parameters');
-        // }
+        const idParam = request.params['id'];
+        if (idParam) {
+            const collection = this.db.collection(this.name);
+            collection.findOne({uuid: idParam}, function(err: any, item: any) {
+                if (err) {
+                    response.status(500).send(err);
+                } else {
+                    response.json(item);
+                }
+            })
+        } else {
+            response.status(400).send('Incorrect parameters');
+        }
     }
 
     updateItem(request: express.Request, response: express.Response) {
-        // const idParam = request.params['id'];
-        // if (idParam) {
-        //     mongoose.connect( this.conn_string);
+        const idParam = request.params['id'];
+        if (idParam) {
+            const collection = this.db.collection(this.name);
+            collection.update({uuid: idParam}, request.body, function(err: any, item: any) {
+                if (err) {
+                    response.status(500).send(err);
+                } else {
+                    response.json(item);
+                }
+            });
+        } else {
+            response.status(400).send('Incorrect parameters');
+        }
 
-        //     const query = { _id: idParam };
-        //     this.model.update(query, request.body).then((doc: mongoose.Document) => {
-        //         const resultJSON = JSON.stringify(doc);
-        //         response.end(resultJSON);
-        //     });
-        // } else {
-        //     response.status(400).send('Incorrect parameters');
-        // }
     }
 
     deleteItem(request: express.Request, response: express.Response) {
-        // const idParam = request.params['id'];
-        // if (idParam) {
-        //     mongoose.connect(this.conn_string);
-        //     this.model.deleteOne({ _id: idParam })
-        //     .then((doc: mongoose.Document) => {
-        //         const resultJSON = JSON.stringify(doc);
-        //         response.end(resultJSON);
-        //     })
-        // } else {
-        //     response.status(400).send('Incorrect parameters');
-        // }
+        const idParam = request.params['id'];
+        if (idParam) {
+            const collection = this.db.collection(this.name);
+            collection.remove({uuid: idParam}, function(err: any, item: any) {
+                if (err) {
+                    response.status(500).send(err);
+                } else {
+                    response.json(item);
+                }
+            })
+        } else {
+            response.status(400).send('Incorrect parameters');
+        }
     }
 
     find(request: express.Request, response: express.Response) {
