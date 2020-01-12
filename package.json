@@ -4,6 +4,11 @@
   "description": "Utah Beachstorming Framework",
   "main": "dist/utah.js",
   "types": "dist/utah.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ilanvolow/utah.git"
+  },
+  "keywords": ["typescript", "framework", "utah", "jest", "express"],
   "scripts": {
     "start": "nodemon --exec npm run buildRun",
     "oldstart": "node dist/index.js",
@@ -12,17 +17,23 @@
     "type-check:watch": "npm run type-check -- --watch",
     "build-typecheck": "npm run build:types && npm run build:js",
     "buildRun": "npm run build && node dist/index.js",
-    "build": "yarn clean:build && babel src --ignore src/__tests__ --out-dir dist --extensions '.ts,.tsx' --source-maps inline",
+    "build": "npm clean:build && babel src --ignore src/__tests__ --out-dir dist --extensions '.ts,.tsx' --source-maps inline",
     "clean:build": "rm -rf dist",
     "build:types": "tsc --emitDeclarationOnly",
     "coverage": "jest --coverage",
-    "prepublishOnly": "yarn build",
+    "prepare": "npm run build && npm test",
+    "prepublish": "tsc",
+    "prepublishOnly": "npm build",
     "test": "jest",
     "test:watch": "jest -o --watch",
     "typecheck": "tsc"
   },
-  "author": "Ilan Volow",
-  "license": "ISC",
+  "homepage": "https://github.com/utah#readme",
+  "bugs": {
+    "url": "https://github.com/ilanvolow/utah/issues"
+  },
+  "author": "Elon Volo",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
