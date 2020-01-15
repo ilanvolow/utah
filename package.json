@@ -8,7 +8,13 @@
     "type": "git",
     "url": "git@github.com:ilanvolow/utah.git"
   },
-  "keywords": ["typescript", "framework", "utah", "jest", "express"],
+  "keywords": [
+    "typescript",
+    "framework",
+    "utah",
+    "jest",
+    "express"
+  ],
   "scripts": {
     "start": "nodemon --exec npm run buildRun",
     "oldstart": "node dist/index.js",
@@ -17,13 +23,13 @@
     "type-check:watch": "npm run type-check -- --watch",
     "build-typecheck": "npm run build:types && npm run build:js",
     "buildRun": "npm run build && node dist/index.js",
-    "build": "npm clean:build && babel src --ignore src/__tests__ --out-dir dist --extensions '.ts,.tsx' --source-maps inline",
+    "build": "yarn clean:build && babel src --ignore src/__tests__ --out-dir dist --extensions '.ts,.tsx' --source-maps inline",
     "clean:build": "rm -rf dist",
     "build:types": "tsc --emitDeclarationOnly",
     "coverage": "jest --coverage",
-    "prepare": "npm run build && npm test",
+    "prepare": "npm run build",
     "prepublish": "tsc",
-    "prepublishOnly": "npm build",
+    "prepublishOnly": "npm test",
     "test": "jest",
     "test:watch": "jest -o --watch",
     "typecheck": "tsc"
@@ -72,7 +78,8 @@
     "typescript": "^3.5.3",
     "webpack": "^4.12.1",
     "webpack-cli": "^3.0.8",
-    "webpack-merge": "^4.1.3"
+    "webpack-merge": "^4.1.3",
+    "yarn": "^1.21.1"
   },
   "dependencies": {
     "@types/mongoose": "^5.5.12",
