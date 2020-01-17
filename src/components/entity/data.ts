@@ -1,7 +1,6 @@
 
 import UtahDataAdapter from './entityix';
 import { Entity, Property } from './entity';
-import { MongoDataAdapter } from './mongo';
 import * as express from 'express';
 
 class Data {
@@ -43,5 +42,5 @@ class Data {
     }
 }
 
-export { Data, Entity, Property, UtahDataAdapter, MongoDataAdapter };
+export { Data, Entity, Property, UtahDataAdapter };
 
