@@ -8,6 +8,9 @@
     "type": "git",
     "url": "git@github.com:ilanvolow/utah.git"
   },
+  "files": [
+    "/dist/**/*",
+  ],
   "keywords": [
     "typescript",
     "framework",
